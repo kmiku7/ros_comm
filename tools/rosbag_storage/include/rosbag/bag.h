@@ -311,6 +311,8 @@ private:
     mutable Buffer   chunk_buffer_;            //!< reusable buffer to read chunk into
     mutable Buffer   decompress_buffer_;       //!< reusable buffer to decompress chunks into
 
+    // 这个字段什么用处？
+    // 只看到到处在写入数据，没看到有读取数据的地方。空耗内存。
     mutable Buffer   outgoing_chunk_buffer_;   //!< reusable buffer to read chunk into
 
     mutable Buffer*  current_buffer_;

@@ -132,6 +132,7 @@ void Bag::openRead(string const& filename) {
 }
 
 void Bag::openWrite(string const& filename) {
+    // KMCOMMENTS: just use system api open a streamed file object.
     file_.openWrite(filename);
 
     startWriting();
@@ -798,6 +799,10 @@ void Bag::readMessageDataRecord102(uint64_t offset, ros::Header& header) const {
 }
 
 // Reading this into a buffer isn't completely necessary, but we do it anyways for now
+// KMCOMMNET:
+// Python api would not read data into memory when data are not compressed.
+// But cpp api will.
+// The full data in chunk will be read into memory, so chunk size treshold is a critical variable.
 void Bag::decompressRawChunk(ChunkHeader const& chunk_header) const {
     assert(chunk_header.compression == COMPRESSION_NONE);
     assert(chunk_header.compressed_size == chunk_header.uncompressed_size);
